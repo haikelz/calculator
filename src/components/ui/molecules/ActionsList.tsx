@@ -1,7 +1,6 @@
 import { cx } from "class-variance-authority";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Link } from "wouter";
 import { navigate } from "wouter/use-location";
 
@@ -10,7 +9,7 @@ export function ActionsList() {
     Cookies.remove("password");
     Cookies.remove("username");
 
-    navigate("/login");
+    navigate("/");
     toast("Logout Success!", { theme: "dark", autoClose: 2500 });
   }
 

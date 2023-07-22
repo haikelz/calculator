@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ChildrenProps } from "~/types";
 
 export default function Layout({ children }: ChildrenProps) {
@@ -8,6 +10,7 @@ export default function Layout({ children }: ChildrenProps) {
           {children}
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 }

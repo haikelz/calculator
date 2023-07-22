@@ -1,10 +1,14 @@
 import Cookies from "js-cookie";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Redirect } from "wouter";
 import Layout from "~/components/ui/Layout";
 import { RegisterForm } from "~/components/ui/organisms";
 import { useTitle } from "~/hooks/useTitle";
+import {
+  VITE_PASSWORD,
+  VITE_USERNAME,
+  decryptedPassword,
+  decryptedUsername,
+} from "~/lib/utils/constants";
 import { ChildrenProps } from "~/types";
 
 export default function Register() {
@@ -14,7 +18,6 @@ export default function Register() {
     <RegisterRoute>
       <Layout>
         <RegisterForm />
-        <ToastContainer />
       </Layout>
     </RegisterRoute>
   );
@@ -23,8 +26,10 @@ export default function Register() {
 function RegisterRoute({ children }: ChildrenProps) {
   return (
     <>
-      {Cookies.get("username") !== undefined &&
-      Cookies.get("password") !== undefined ? (
+      {(Cookies.get("password") !== undefined &&
+        Cookies.get("username") !== undefined) ||
+      (decryptedPassword === VITE_PASSWORD &&
+        decryptedUsername === VITE_USERNAME) ? (
         <Redirect to="/" />
       ) : (
         children

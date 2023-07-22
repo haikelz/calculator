@@ -1,14 +1,17 @@
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Redirect } from "wouter";
 import Layout from "~/components/ui/Layout";
 import { Heading, Paragraph } from "~/components/ui/atoms";
 import { Card } from "~/components/ui/molecules/Card";
 import { useTitle } from "~/hooks/useTitle";
-import { VITE_PASSWORD, VITE_USERNAME } from "~/lib/utils/constants";
+import {
+  VITE_PASSWORD,
+  VITE_USERNAME,
+  decryptedPassword,
+  decryptedUsername,
+} from "~/lib/utils/constants";
 import { resultsListAtom } from "~/store";
 import { ChildrenProps } from "~/types";
 
@@ -38,7 +41,6 @@ export default function SavedResults() {
             )}
           </div>
         </div>
-        <ToastContainer />
       </Layout>
     </SavedResultsRoute>
   );
@@ -47,8 +49,10 @@ export default function SavedResults() {
 function SavedResultsRoute({ children }: ChildrenProps) {
   return (
     <>
-      {Cookies.get("password") === VITE_PASSWORD ||
-      Cookies.get("username") === VITE_USERNAME ? (
+      {(Cookies.get("password") !== undefined &&
+        Cookies.get("username") !== undefined) ||
+      (decryptedUsername === VITE_USERNAME &&
+        decryptedPassword === VITE_PASSWORD) ? (
         children
       ) : (
         <Redirect to="/login" />
