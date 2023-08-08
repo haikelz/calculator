@@ -35,6 +35,14 @@ export function RegisterForm() {
       AES.encrypt(getValues("password"), "password").toString(),
       { expires: 7 }
     );
+    Cookies.set(
+      "registered-account",
+      AES.encrypt(
+        getValues("username") + getValues("password"),
+        "registered-account"
+      ).toString(),
+      { expires: 7 }
+    );
 
     navigate("/");
   }

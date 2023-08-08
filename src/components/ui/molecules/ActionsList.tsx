@@ -1,7 +1,6 @@
 import { cx } from "class-variance-authority";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { Link } from "wouter";
 import { navigate } from "wouter/use-location";
 
 export function ActionsList() {
@@ -10,11 +9,12 @@ export function ActionsList() {
     Cookies.remove("username");
 
     navigate("/");
+    window.location.reload();
     toast("Logout Success!", { theme: "dark", autoClose: 2500 });
   }
 
   return (
-    <div className="space-x-3 flex justify-center items-center mt-6">
+    <div className="flex justify-center items-center mt-6">
       <button
         type="button"
         className={cx(
@@ -27,19 +27,6 @@ export function ActionsList() {
       >
         Logout
       </button>
-      <Link to="/saved-results">
-        <button
-          type="button"
-          className={cx(
-            "bg-blue-600 text-lg px-4 py-1.5",
-            "hover:bg-blue-700",
-            "text-white font-semibold rounded-md"
-          )}
-          aria-label="go to saved results"
-        >
-          Saved Results
-        </button>
-      </Link>
     </div>
   );
 }

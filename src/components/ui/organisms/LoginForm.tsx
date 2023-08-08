@@ -1,19 +1,24 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cx } from "class-variance-authority";
-import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { Link } from "wouter";
 import { navigate } from "wouter/use-location";
-import { VITE_PASSWORD, VITE_USERNAME } from "~/lib/utils/constants";
+import {
+  VITE_PASSWORD,
+  VITE_USERNAME,
+  decryptedRegisteredAccount,
+} from "~/lib/utils/constants";
 import { loginSchema } from "~/lib/utils/schemas";
 import { Heading, Paragraph } from "../atoms";
-import { Link } from "wouter";
+import Cookies from "js-cookie";
 
 export function LoginForm() {
   const {
     handleSubmit,
     register,
     formState: { errors },
+    getValues,
   } = useForm({
     defaultValues: {
       username: "",
@@ -24,19 +29,22 @@ export function LoginForm() {
 
   function onSubmit() {
     if (
-      Cookies.get("password") === VITE_PASSWORD &&
-      Cookies.get("username") === VITE_USERNAME
+      getValues("username") + getValues("password") ===
+      decryptedRegisteredAccount
     ) {
+      Cookies.set("username", getValues("username"));
+      Cookies.set("password", getValues("password"));
+
       navigate("/");
       toast("Login success!", { theme: "dark", autoClose: 2500 });
       return;
     }
 
     toast(
-      Cookies.get("password") !== VITE_PASSWORD &&
-        Cookies.get("username") !== VITE_USERNAME
+      getValues("password") !== VITE_PASSWORD &&
+        getValues("username") !== VITE_USERNAME
         ? "Wrong password and username! Please input the correct username and password"
-        : Cookies.get("username") !== VITE_USERNAME
+        : getValues("username") !== VITE_USERNAME
         ? "Wrong username! Please input the correct username"
         : "Wrong password! Please input the correct password!",
       { theme: "dark", autoClose: 2500 }

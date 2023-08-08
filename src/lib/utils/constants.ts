@@ -17,3 +17,10 @@ export const decryptedPassword = AES.decrypt(
     : "password",
   "password"
 ).toString(enc.Utf8);
+
+export const decryptedRegisteredAccount = AES.decrypt(
+  Cookies.get("registered-account") !== undefined
+    ? (Cookies.get("registered-account") as string)
+    : "registered-account",
+  "registered-account"
+).toString(enc.Utf8);

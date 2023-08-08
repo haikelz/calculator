@@ -1,9 +1,9 @@
 import Layout from "~/components/ui/Layout";
 import { Heading, Paragraph } from "~/components/ui/atoms";
-import { useTitle } from "~/hooks/useTitle";
+import { useTitle } from "~/hooks";
 
 export default function NotFoundPage() {
-  useTitle("� 404 Not Found");
+  useTitle("404 Not Found");
 
   return (
     <Layout>

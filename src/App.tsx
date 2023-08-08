@@ -1,24 +1,29 @@
+import { Suspense, lazy } from "react";
 import { Route, Switch } from "wouter";
+import Loading from "./components/ui/Loading";
 import NotFoundPage from "./pages/404";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import SavedResults from "./pages/SavedResults";
+
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
 
 export default function App() {
   return (
     <Switch>
       <Route path="/">
-        <Home />
-      </Route>
-      <Route path="/saved-results">
-        <SavedResults />
+        <Suspense fallback={<Loading />}>
+          <Home />
+        </Suspense>
       </Route>
       <Route path="/login">
-        <Login />
+        <Suspense fallback={<Loading />}>
+          <Login />
+        </Suspense>
       </Route>
       <Route path="/register">
-        <Register />
+        <Suspense fallback={<Loading />}>
+          <Register />
+        </Suspense>
       </Route>
       <Route>
         <NotFoundPage />

@@ -1,7 +1,8 @@
+import Cookies from "js-cookie";
 import { Redirect } from "wouter";
 import Layout from "~/components/ui/Layout";
 import { LoginForm } from "~/components/ui/organisms";
-import { useTitle } from "~/hooks/useTitle";
+import { useTitle } from "~/hooks";
 import {
   VITE_PASSWORD,
   VITE_USERNAME,
@@ -9,7 +10,6 @@ import {
   decryptedUsername,
 } from "~/lib/utils/constants";
 import { ChildrenProps } from "~/types";
-import Cookies from "js-cookie";
 
 export default function Login() {
   useTitle("Login");

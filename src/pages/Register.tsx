@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { Redirect } from "wouter";
 import Layout from "~/components/ui/Layout";
 import { RegisterForm } from "~/components/ui/organisms";
-import { useTitle } from "~/hooks/useTitle";
+import { useTitle } from "~/hooks";
 import {
   VITE_PASSWORD,
   VITE_USERNAME,

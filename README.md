@@ -7,9 +7,22 @@
 
 - Login
 - Register
-- Save data to localStorage
 - Form validation with `react-hook-form` and `zod` for schemas.
 - Implementing atomic design and cva
+
+**Username:** username
+
+**Password:** password123!
+
+## Screenshots
+
+![Screenshot 1](/public/docs/screenshot-1.png)
+
+![Screenshot 2](/public/docs/screenshot-2.png)
+
+![Screenshot 3](/public/docs/screenshot-3.png)
+
+![Screenshot 4](/public/docs/screenshot-4.png)
 
 ## Tech Stack
 
